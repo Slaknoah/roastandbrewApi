@@ -4,7 +4,7 @@ namespace App\Http\Requests\API\Company;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCompanyRequest extends FormRequest
+class UpdateCompanyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -37,23 +37,8 @@ class CreateCompanyRequest extends FormRequest
             'facebook_url'  => 'nullable|url',
             'twitter_url'   => 'nullable|url',
             'instagram_url' => 'nullable|url',
-            'logo'          => 'required|file|image',
-            'header'        => 'required|file|image'
-        ];
-    }
-
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'name.required'     => 'The name of the company is required.',
-            'name.string'       => 'The name must be a string.',
-            'roaster.required'  => 'A flag declaring the company as a roaster is required.'
+            'logo'          => 'sometimes|file|image',
+            'header_image_url' => 'sometimes|file|image'
         ];
     }
 }

@@ -23,18 +23,21 @@ class CompanyFactory extends Factory
     public function definition()
     {
         return [
-            'name'          => $this->faker->name,
+            'name'          => $this->faker->company,
             'roaster'       => 1,
             'subscription'  => 0,
             'description'   => $this->faker->text( 300 ),
             'website'       => $this->faker->url,
             'address'       => $this->faker->streetAddress,
+            'country'       => $this->faker->countryCode,
             'city'          => $this->faker->city,
             'state'         => $this->faker->stateAbbr,
             'zip'           => $this->faker->postcode,
             'facebook_url'  => $this->faker->url,
             'twitter_url'   => $this->faker->url,
-            'instagram_url' => $this->faker->url
+            'instagram_url' => $this->faker->url,
+            'header_image_url'    => 'https://via.placeholder.com/500x500/?' . mt_rand(),
+            'logo_url'      => 'https://via.placeholder.com/100x100/?' . mt_rand()
         ];
     }
 }

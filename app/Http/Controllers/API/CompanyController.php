@@ -4,8 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Company\CreateCompanyRequest;
+use App\Http\Requests\API\Company\UpdateCompanyRequest;
 use App\Models\Company;
-use Illuminate\Http\Request;
+use App\Services\Company\UpdateCompany;
 use App\Services\Company\CreateCompany;
 use Illuminate\Http\Response;
 
@@ -13,7 +14,7 @@ class CompanyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except('index');
+        $this->middleware('auth:sanctum')->except('index', 'show');
     }
 
     /**
@@ -24,7 +25,7 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        return response()->json($companies);
+        return response()->json( $companies );
     }
 
     /**
@@ -35,8 +36,8 @@ class CompanyController extends Controller
      */
     public function store(CreateCompanyRequest $request)
     {
-        $create_company = new CreateCompany( $request->all() );
-        $newCompany = $create_company->save();
+        $createCompany = new CreateCompany( $request->all() );
+        $newCompany = $createCompany->save();
 
         return response()->json( $newCompany, 201 );
     }
@@ -44,34 +45,40 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Company  $company
+     * @param Company $company
      * @return Response
      */
     public function show(Company $company)
     {
-        //
+        return  response()->json( $company, 200 );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param  \App\Models\Company  $company
+     * @param UpdateCompanyRequest $request
+     * @param Company $company
      * @return Response
      */
-    public function update(Request $request, Company $company)
+    public function update(UpdateCompanyRequest $request, Company $company)
     {
-        //
+        $update_company = new UpdateCompany( $company, $request->all() );
+        $update_company->save();
+
+        return response()->json( null, 204 );
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Company  $company
-     * @return Response
+     * @param Company $company
+     * @return void
+     * @throws \Exception
      */
     public function destroy(Company $company)
     {
-        //
+        $company->delete();
+
+        return response()->json( '', 204 );
     }
 }
