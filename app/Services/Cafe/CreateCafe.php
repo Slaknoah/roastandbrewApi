@@ -5,6 +5,7 @@ namespace App\Services\Cafe;
 
 
 use App\Models\Cafe;
+use App\Http\Resources\Cafe\Cafe as CafeResource;
 
 class CreateCafe
 {
@@ -19,7 +20,7 @@ class CreateCafe
 
     public function save()
     {
-        $this->persistCafe();
+        return $this->persistCafe();
     }
 
     public function persistCafe()
@@ -33,15 +34,15 @@ class CreateCafe
         $cafe->address          = $this->data['address'];
         $cafe->city             = $this->data['city'];
         $cafe->state            = $this->data['state'];
-        $cafe->province         = $this->data['province'];
-        $cafe->territory        = $this->data['territory'];
         $cafe->zip              = $this->data['zip'];
         $cafe->country          = $this->data['country'];
+        $cafe->tea              = $this->data['tea'];
+        $cafe->matcha           = $this->data['matcha'];
 
         $cafe->save();
         $this->saveImages( $cafe );
 
-        return $cafe;
+        return new CafeResource( $cafe );
     }
 
     private function saveImages( $cafe )

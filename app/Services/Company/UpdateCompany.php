@@ -3,8 +3,6 @@
 
 namespace App\Services\Company;
 
-use App\Models\Company;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class UpdateCompany

@@ -4,13 +4,13 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Log;
 
 class Cafe extends Model
 {
-    use SoftDeletes, Sluggable;
+    use SoftDeletes, Sluggable, HasFactory;
 
     protected $table = 'cafes';
 
@@ -32,7 +32,7 @@ class Cafe extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => [ 'location_name', 'address', 'city', 'state' ]
             ]
         ];
     }

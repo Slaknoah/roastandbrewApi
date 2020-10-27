@@ -65,6 +65,8 @@ class CompanyController extends Controller
         $update_company = new UpdateCompany( $company, $request->all() );
         $update_company->save();
 
+        $companies = Company::all();
+
         return response()->json( null, 204 );
     }
 

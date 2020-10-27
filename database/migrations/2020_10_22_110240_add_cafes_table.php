@@ -24,6 +24,7 @@ class AddCafesTable extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('state');
+            $table->string('country');
             $table->string('zip');
             $table->integer('tea');
             $table->integer('matcha');

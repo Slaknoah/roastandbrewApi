@@ -10,6 +10,7 @@ use App\Models\Cafe;
 use App\Models\Company;
 use App\Services\Cafe\CreateCafe;
 use Illuminate\Http\Response;
+use App\Http\Resources\Cafe\Cafe as CafeResource;
 
 class CafeController extends Controller
 {
@@ -23,9 +24,11 @@ class CafeController extends Controller
      * @param Company $company
      * @return Response
      */
-    public function index(Company $company)
+    public function index( Company $company )
     {
+        $cafes = $company->cafes;
 
+        return response()->json( CafeResource::collection( $cafes ) );
     }
 
     /**
@@ -36,9 +39,11 @@ class CafeController extends Controller
      *
      * @return Response
      */
-    public function show(Company $company, Cafe $cafe)
+    public function show( Company $company, Cafe $cafe )
     {
+        $cafe = new CafeResource( $cafe );
 
+        return  response()->json( $cafe );
     }
 
     /**
@@ -52,10 +57,9 @@ class CafeController extends Controller
     public function store(CreateCafeRequest $request, Company $company)
     {
         $createCafe = new CreateCafe( $request->all(), $company );
+        $newCafe    = $createCafe->save();
 
-        $newCafe = $createCafe->save();
-
-        return response()->json( $cafe, 201);
+        return response()->json( $newCafe, 201 );
     }
 
     /**
@@ -76,8 +80,11 @@ class CafeController extends Controller
      * @param Company $company
      * @param Cafe $cafe
      * @return Response
+     * @throws \Exception
      */
     public function destroy( Company $company, Cafe $cafe)  {
+        $cafe->delete();
 
+        return response()->json( '', 204 );
     }
 }

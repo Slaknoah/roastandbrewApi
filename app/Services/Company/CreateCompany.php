@@ -52,11 +52,11 @@ class CreateCompany
     private function saveImages( $company ) {
         $uploadCompanyImages = new UploadCompanyImages( $company );
 
-        if ( isset( $data['logo'] ) ) {
+        if ( isset( $this->data['logo'] ) ) {
             $uploadCompanyImages->saveLogoImage( $this->data['logo'] );
         }
 
-        if ( isset( $data['header'] ) ) {
+        if ( isset( $this->data['header'] ) ) {
             $uploadCompanyImages->saveHeaderImage( $this->data['header'] );
         }
     }
