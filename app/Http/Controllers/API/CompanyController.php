@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Company\CreateCompanyRequest;
 use App\Http\Requests\API\Company\UpdateCompanyRequest;
 use App\Models\Company;
+use App\Http\Resources\Company\Company as CompanyResource;
 use App\Services\Company\UpdateCompany;
 use App\Services\Company\CreateCompany;
 use Illuminate\Http\Response;
@@ -25,7 +26,7 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        return response()->json( $companies );
+        return response()->json( CompanyResource::collection( $companies ) );
     }
 
     /**
@@ -50,6 +51,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
+        $company = new CompanyResource( $company );
         return  response()->json( $company, 200 );
     }
 

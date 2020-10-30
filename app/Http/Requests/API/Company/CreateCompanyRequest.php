@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\API\Company;
 
+use App\Http\Resources\Company\Company;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateCompanyRequest extends FormRequest
@@ -13,7 +14,7 @@ class CreateCompanyRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->user()->can( 'store', [ Company::class ] );
     }
 
     /**

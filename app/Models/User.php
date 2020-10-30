@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Notifications\VerifyApiEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -44,8 +46,12 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify( new VerifyApiEmail );
     }
 
+    /**
+     * A user has many Companies
+     * @return BelongsToMany
+     */
     public function companies()
     {
-        return $this->hasMany('App\Models\Company', 'added_by', 'id');
+        return $this->belongsToMany('App\Models\Company', 'companies_owners', 'user_id', 'company_id');
     }
 }

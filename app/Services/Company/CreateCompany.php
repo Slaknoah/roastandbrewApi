@@ -45,7 +45,7 @@ class CreateCompany
 
         $company->save();
         $this->saveImages( $company );
-
+        $company->owners()->sync([ Auth::guard('sanctum')->user()->id ]);
         return $company;
     }
 

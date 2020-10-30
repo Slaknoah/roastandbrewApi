@@ -9,6 +9,7 @@ use App\Http\Requests\API\Cafe\UpdateCafeRequest;
 use App\Models\Cafe;
 use App\Models\Company;
 use App\Services\Cafe\CreateCafe;
+use App\Services\Cafe\UpdateCafe;
 use Illuminate\Http\Response;
 use App\Http\Resources\Cafe\Cafe as CafeResource;
 
@@ -71,7 +72,10 @@ class CafeController extends Controller
      */
     public function update( UpdateCafeRequest $request, Company $company, Cafe $cafe )
     {
+        $updateCafe = new UpdateCafe( $company, $cafe, $request->all() );
+        $updateCafe->save();
 
+        return response()->json( null, 204 );
     }
 
     /**

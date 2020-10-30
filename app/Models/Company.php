@@ -18,11 +18,18 @@ class Company extends Model
     protected $guarded = [];
 
     /**
-     * A company belongs to a User
+     * A company was added by a User
      * @return BelongsTo
      */
     public function addedBy() {
         return $this->belongsTo('App\Models\User', 'id', 'added_by');
+    }
+
+    /**
+     * A company has many owners
+     */
+    public function owners() {
+        return $this->belongsToMany('App\Models\User', 'companies_owners', 'company_id', 'user_id');
     }
 
     /**

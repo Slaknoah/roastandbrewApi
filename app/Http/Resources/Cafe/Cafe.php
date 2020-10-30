@@ -28,6 +28,7 @@ class Cafe extends JsonResource
             'matcha'            => $this->matcha,
             'primary_image_url' => $this->primary_image_url,
             'company'           => $this->company,
+            'brew_methods'      => $this->brewMethods
         ];
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\BrewMethodController;
 use App\Http\Controllers\API\CafeController;
 use App\Http\Controllers\API\CompanyController;
 use Illuminate\Support\Facades\Route;
@@ -27,4 +28,9 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get( '/companies/{company}/cafes/{cafe}', [ CafeController::class, 'show'] );
     Route::put( '/companies/{company}/cafes/{cafe}', [ CafeController::class, 'update'] );
     Route::delete( '/companies/{company}/cafes/{cafe}', [ CafeController::class, 'destroy'] );
+
+    /**
+     * Brew method routes
+     */
+    Route::get( '/brew-methods', [BrewMethodController::class, 'index'] );
 });

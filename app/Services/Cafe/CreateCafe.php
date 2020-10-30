@@ -41,6 +41,7 @@ class CreateCafe
 
         $cafe->save();
         $this->saveImages( $cafe );
+        $this->saveBrewMethods( $cafe );
 
         return new CafeResource( $cafe );
     }
@@ -52,5 +53,14 @@ class CreateCafe
         if ( isset( $this->data['primary_image'] ) ) {
             $uploadCafeImages->savePrimaryImage( $this->data['primary_image'] );
         }
+    }
+
+    /**
+     * Saves brew methods to cafe
+     */
+    private function saveBrewMethods( $cafe ) {
+        $brewMethodsArr = explode(',', $this->data['brew_methods']);
+
+        $cafe->brewMethods()->sync( $brewMethodsArr );
     }
 }

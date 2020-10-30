@@ -19,13 +19,13 @@ class AddCafesTable extends Migration
             $table->foreign('company_id')->references('id')->on('companies');
             $table->string('slug')->nullable();
             $table->string('location_name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->text('primary_image_url');
             $table->string('address');
             $table->string('city');
-            $table->string('state');
+            $table->string('state')->nullable();
             $table->string('country');
-            $table->string('zip');
+            $table->string('zip')->nullable();
             $table->integer('tea');
             $table->integer('matcha');
             $table->softDeletes();

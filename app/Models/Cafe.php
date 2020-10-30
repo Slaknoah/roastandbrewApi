@@ -46,4 +46,11 @@ class Cafe extends Model
     {
         return 'slug';
     }
+
+    /**
+     * Cafe has many brew methods
+     */
+    public function brewMethods() {
+        return $this->belongsToMany('App\Models\BrewMethod', 'cafes_brew_methods', 'cafe_id', 'brew_method_id');
+    }
 }

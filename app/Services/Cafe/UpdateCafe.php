@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\Company;
+namespace App\Services\Cafe;
 
 use App\Services\Cafe\UploadCafeImages;
 
@@ -11,11 +11,11 @@ class UpdateCafe
     private $company;
     private $cafe;
 
-    public function __construct( $company, $cafe, $companyData )
+    public function __construct( $company, $cafe, $cafeData )
     {
         $this->cafe = $cafe;
         $this->company = $company;
-        $this->data = $companyData;
+        $this->data = $cafeData;
     }
 
     public function save()
@@ -37,17 +37,27 @@ class UpdateCafe
         $this->cafe->matcha           = $this->data['matcha'];
 
         $this->cafe->save();
-        $this->saveImages( $this->cafe );
+        $this->saveImages();
+        $this->saveBrewMethods();
 
         return true;
     }
 
-    private function saveImages( $cafe )
+    private function saveImages( )
     {
-        $uploadCafeImages = new UploadCafeImages( $cafe );
+        $uploadCafeImages = new UploadCafeImages( $this->cafe );
 
         if ( isset( $this->data['primary_image'] ) ) {
             $uploadCafeImages->savePrimaryImage( $this->data['primary_image'] );
         }
+    }
+
+    /**
+     * Saves brew methods to cafe
+     */
+    private function saveBrewMethods() {
+        $brewMethodsArr = explode(',', $this->data['brew_methods']);
+
+        $this->cafe->brewMethods()->sync( $brewMethodsArr );
     }
 }
