@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\User\Authentication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -41,16 +42,8 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        if (Auth::attempt([
-            'email'     => $request->get('email'),
-            'password'  => $request->get('password')
-        ])) {
-            return response()->json('', 204);
-        } else {
-            return response()->json([
-                'error' => 'invalid_credentials'
-            ], 403);
-        }
+        $authentication = new Authentication( $request->all() );
+        return $authentication->authenticateRequest();
     }
 
     public function logout(Request $request)

@@ -17,10 +17,10 @@ return [
 
     'paths' => [
         'sanctum/csrf-cookie',
-        'api/v1/*',
         'login',
         'register',
         'logout',
+        'api/v1/*',
     ],
 
     'allowed_methods' => ['*'],
@@ -31,9 +31,9 @@ return [
 
     'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+    'exposed_headers' => false,
 
-    'max_age' => 0,
+    'max_age' => false,
 
     'supports_credentials' => true,
 

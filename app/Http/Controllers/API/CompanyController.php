@@ -17,7 +17,7 @@ class CompanyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except('index', 'show');
+        $this->middleware('auth:sanctum')->except('index', 'show', 'like');
         $this->middleware('can:store,App\Models\Company')->only('store');
         $this->middleware('can:update,company')->only('update');
         $this->middleware('can:delete,company')->only('destroy');

@@ -16,15 +16,16 @@ class LikeCompany
 
     public function toggle()
     {
-        if ( $this->company->likes->contains( Auth::guard('sanctum')->user()->id ) ) {
-            $this->company->likes()->detach( Auth::guard('sanctum')->user()->id );
+        $user = Auth::guard('sanctum')->user()->id;
+        if ( $this->company->likes->contains( $user ) ) {
+            $this->company->likes()->detach( $user );
 
             return [
                 'status'    => false,
                 'likes'     => $this->company->likes->count() - 1
             ];
         } else {
-            $this->company->likes()->attach( Auth::guard('sanctum')->user()->id );
+            $this->company->likes()->attach( $user );
 
             return [
                 'status'    => true,
