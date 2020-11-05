@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Company;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class Company extends JsonResource
 {
@@ -14,7 +15,7 @@ class Company extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $result = [
             'id'                => $this->id,
             'name'              => $this->name,
             'slug'              => $this->slug,
@@ -33,7 +34,15 @@ class Company extends JsonResource
             'twitter_url'       => $this->twitter_url,
             'instagram_url'     => $this->instagram_url,
             'added_by'          => $this->added_by,
-            'cafes_count'       => $this->cafes()->count()
+            'cafes_count'       => $this->cafes()->count(),
+            'likes_count'       => $this->likes()->count(),
+            'liked'             => 0
         ];
+
+        if ( Auth::guard('sanctum')->check() && $this->likes->contains( Auth::guard('sanctum')->user()->id ) ) {
+            $result['liked'] = 1;
+        }
+
+        return $result;
     }
 }

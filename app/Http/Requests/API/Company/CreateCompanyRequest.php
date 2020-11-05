@@ -14,7 +14,7 @@ class CreateCompanyRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can( 'store', [ Company::class ] );
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class CreateCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          => 'required|string',
+            'name'          => 'required|string|unique:companies',
             'roaster'       => 'required|integer',
             'subscription'  => 'required|integer',
             'description'   => 'nullable|string',

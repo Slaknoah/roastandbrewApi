@@ -18,6 +18,9 @@ class CafeController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum')->except('index', 'show');
+        $this->middleware('can:store,App/Models/Cafe')->only('store');
+        $this->middleware('can:update,cafe')->only('update');
+        $this->middleware('can:delete,cafe')->only('destroy');
     }
 
     /**

@@ -19,6 +19,7 @@ Route::group(['prefix' => 'v1'], function () {
      * Company Routes
      */
     Route::apiResource('companies', CompanyController::class);
+    Route::put('/companies/{company}/like', [ CompanyController::class, 'like' ]);
 
     /**
      * Cafe Routes

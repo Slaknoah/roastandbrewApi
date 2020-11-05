@@ -7,8 +7,10 @@ use App\Http\Requests\API\Company\CreateCompanyRequest;
 use App\Http\Requests\API\Company\UpdateCompanyRequest;
 use App\Models\Company;
 use App\Http\Resources\Company\Company as CompanyResource;
+use App\Services\Company\LikeCompany;
 use App\Services\Company\UpdateCompany;
 use App\Services\Company\CreateCompany;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class CompanyController extends Controller
@@ -16,6 +18,9 @@ class CompanyController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum')->except('index', 'show');
+        $this->middleware('can:store,App\Models\Company')->only('store');
+        $this->middleware('can:update,company')->only('update');
+        $this->middleware('can:delete,company')->only('destroy');
     }
 
     /**
@@ -70,6 +75,19 @@ class CompanyController extends Controller
         $companies = Company::all();
 
         return response()->json( null, 204 );
+    }
+
+    /**
+     * Toggle like
+     * @param Company $company
+     * @return JsonResponse
+     */
+    public function like( Company $company )
+    {
+        $likeCompany    = new LikeCompany( $company );
+        $liked          = $likeCompany->toggle();
+
+        return response()->json( $liked, 201 );
     }
 
     /**

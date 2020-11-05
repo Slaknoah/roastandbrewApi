@@ -28,7 +28,8 @@ class Company extends Model
     /**
      * A company has many owners
      */
-    public function owners() {
+    public function owners()
+    {
         return $this->belongsToMany('App\Models\User', 'companies_owners', 'company_id', 'user_id');
     }
 
@@ -36,8 +37,17 @@ class Company extends Model
      * A company has many cafes
      * @return HasMany
      */
-    public function cafes() {
+    public function cafes()
+    {
         return $this->hasMany('App\Models\Cafe', 'company_id', 'id');
+    }
+
+    /**
+     * Company has many likes
+     */
+    public function likes()
+    {
+        return $this->belongsToMany('App\Models\User', 'companies_likes', 'company_id', 'user_id');
     }
 
     /**

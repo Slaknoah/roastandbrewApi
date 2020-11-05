@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Company;
+use App\Models\Cafe;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CompanyPolicy
+class CafePolicy
 {
     use HandlesAuthorization;
 
@@ -20,11 +20,6 @@ class CompanyPolicy
         //
     }
 
-    /**
-     * Authorize all actions for admin
-     * @param User $user
-     * @return bool
-     */
     public function before( User $user )
     {
         if ( $user->permission === 'admin' ) {
@@ -39,18 +34,18 @@ class CompanyPolicy
         return false;
     }
 
-    public function update( User $user, Company $company )
+    public function update( User $user, Cafe $cafe )
     {
-        if ( $user->companies->contains( $company->id ) ) {
+        if ( $user->companies->contains( $cafe->company_id ) ) {
             return true;
         } else {
             return false;
         }
     }
 
-    public function delete( User $user, Company $company )
+    public function delete( User $user, Cafe $cafe )
     {
-        if ( $user->companies->contains( $company->id ) ) {
+        if ( $user->companies->contains( $cafe->company_id ) ) {
             return true;
         } else {
             return false;
