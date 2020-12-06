@@ -27,7 +27,7 @@ class CafeFactory extends Factory
             'location_name'  => $this->faker->company,
             'address'        => $this->faker->address,
             'city'           => $this->faker->city,
-            'state'          => $this->faker->stateAbbr,
+            'state'          => $this->faker->city,
             'country'        => $this->faker->countryCode,
             'zip'            => $this->faker->postcode,
             'tea'            => random_int( 0, 1),

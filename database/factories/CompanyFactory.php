@@ -31,7 +31,7 @@ class CompanyFactory extends Factory
             'address'       => $this->faker->streetAddress,
             'country'       => $this->faker->countryCode,
             'city'          => $this->faker->city,
-            'state'         => $this->faker->stateAbbr,
+            'state'         => $this->faker->city,
             'zip'           => $this->faker->postcode,
             'facebook_url'  => $this->faker->url,
             'twitter_url'   => $this->faker->url,

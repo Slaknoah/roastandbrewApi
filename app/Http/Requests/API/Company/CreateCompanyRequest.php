@@ -33,7 +33,7 @@ class CreateCompanyRequest extends FormRequest
             'address'       => 'required|string',
             'country'       => 'required',
             'city'          => 'required|string',
-            'state'         => 'nullable|string|size:2',
+            'state'         => 'nullable|string',
             'zip'           => 'nullable|numeric',
             'facebook_url'  => 'nullable|url',
             'twitter_url'   => 'nullable|url',

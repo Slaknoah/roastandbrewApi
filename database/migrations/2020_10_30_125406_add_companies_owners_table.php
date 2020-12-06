@@ -29,6 +29,9 @@ class AddCompaniesOwnersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('companies_owners', function (Blueprint $table) {
+            $table->dropForeign('companies_owners_company_id_foreign');
+            $table->dropColumn('permission');
+        });
     }
 }

@@ -15,19 +15,20 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-        $user = User::find( 1 );
+        $admin = User::find( 1 );
+        $owner = User::find( 2 );
 
         $companies = Company::factory()
                     ->times( 20 )
                     ->create([
-                        'added_by' => $user->id
+                        'added_by' => $admin->id
                     ]);
 
         foreach ( $companies as $key => $company ) {
-            $company->owners()->sync([ $user->id ]);
+            $company->owners()->sync([ $owner->id ]);
 
             if ($key == random_int($key, $key + 1)) {
-                $company->likes()->sync( [ $user->id ] );
+                $company->likes()->sync( [ $owner->id, $admin->id ] );
             }
         }
     }

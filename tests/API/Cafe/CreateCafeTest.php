@@ -32,7 +32,7 @@ class CreateCafeTest extends TestCase
 
         $this->actingAs( $this->user )
             ->json( 'POST', '/api/v1/companies/' . $this->company->slug . '/cafes', [
-                'location_name'  => 'Stevens Point',
+                'location_na`me'  => 'Stevens Point',
                 'address'        => '1410 3rd St.',
                 'city'           => 'Stevens Point',
                 'state'          => 'WI',
