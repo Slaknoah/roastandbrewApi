@@ -19,6 +19,7 @@ class CompanyFactory extends Factory
      * Define the model's default state.
      *
      * @return array
+     * @throws \Exception
      */
     public function definition()
     {
@@ -36,8 +37,8 @@ class CompanyFactory extends Factory
             'facebook_url'  => $this->faker->url,
             'twitter_url'   => $this->faker->url,
             'instagram_url' => $this->faker->url,
-            'header_image_url'    => 'https://via.placeholder.com/500x500/?' . mt_rand(),
-            'logo_url'      => 'https://via.placeholder.com/100x100/?' . mt_rand()
+            'header_image_url'    => 'http://lorempixel.com/1200/600/food/' . random_int(1,10),
+            'logo_url'      => 'http://lorempixel.com/200/200/food/' . random_int(1,10),
         ];
     }
 }

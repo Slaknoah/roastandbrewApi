@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
                 ]);
 
         User::factory()->create([
-            'email'     => 'owner   @email.com',
+            'email'     => 'owner@email.com',
             'name'      => 'owner',
             'password'  => bcrypt('secret'),
             'permission'=> 'owner'

@@ -33,7 +33,7 @@ class CafeFactory extends Factory
             'tea'            => random_int( 0, 1),
             'matcha'         => random_int( 0, 1),
             'description'    => $this->faker->text,
-            'primary_image_url'  => 'https://via.placeholder.com/500x500/?' . mt_rand()
+            'primary_image_url'  => 'http://lorempixel.com/1200/600/food/'.random_int(1,10)
         ];
     }
 }

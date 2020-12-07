@@ -25,9 +25,9 @@ class CafeSeeder extends Seeder
             return $arr['id'];
         }, $brew_methods->toArray() );
 
-        foreach ( $companies as $company ) {
+        foreach ( $companies as $key => $company ) {
             $cafes = Cafe::factory()->times( 7)->create([
-                'company_id'    => $company->id
+                'company_id'        => $company->id,
             ]);
 
             foreach ( $cafes as $cafe ) {
