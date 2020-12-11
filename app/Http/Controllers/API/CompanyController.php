@@ -97,6 +97,9 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
+        // Delete company's cafes
+        $company->cafes()->delete();
+
         $company->delete();
 
         return response()->json( '', 204 );

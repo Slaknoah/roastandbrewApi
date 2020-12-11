@@ -26,6 +26,7 @@ Route::group(['prefix' => 'v1'], function () {
     /**
      * Cafe Routes
      */
+    Route::get( '/cafes', [ CafeController::class, 'search' ] );
     Route::get( '/companies/{company}/cafes', [ CafeController::class, 'index'] );
     Route::post( '/companies/{company}/cafes', [ CafeController::class, 'store'] );
     Route::get( '/companies/{company}/cafes/{cafe}', [ CafeController::class, 'show'] );

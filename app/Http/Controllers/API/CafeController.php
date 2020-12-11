@@ -10,14 +10,16 @@ use App\Models\Cafe;
 use App\Models\Company;
 use App\Services\Cafe\CreateCafe;
 use App\Services\Cafe\UpdateCafe;
+use App\Services\Cafe\SearchCafes;
 use Illuminate\Http\Response;
 use App\Http\Resources\Cafe\Cafe as CafeResource;
+use Illuminate\Http\Request;
 
 class CafeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except('index', 'show');
+        $this->middleware('auth:sanctum')->except('index', 'show', 'search');
         $this->middleware('can:store,App/Models/Cafe')->only('store');
         $this->middleware('can:update,cafe')->only('update');
         $this->middleware('can:delete,cafe')->only('destroy');
@@ -33,6 +35,14 @@ class CafeController extends Controller
         $cafes = $company->cafes;
 
         return response()->json( CafeResource::collection( $cafes ) );
+    }
+
+    public function search( Request $request )
+    {
+        $searchCafes = new SearchCafes( $request->all() );
+        $cafes      = $searchCafes->search();
+
+        return CafeResource::collection( $cafes )->response();
     }
 
     /**
