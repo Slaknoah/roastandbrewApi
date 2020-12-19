@@ -18,21 +18,21 @@ class UserSeeder extends Seeder
                 ->create([
                     'email'     => 'admin@email.com',
                     'name'      => 'admin',
-                    'password'  => bcrypt('secret'),
+                    'password'  => bcrypt('password'),
                     'permission'=> 'admin'
                 ]);
 
         User::factory()->create([
             'email'     => 'owner@email.com',
             'name'      => 'owner',
-            'password'  => bcrypt('secret'),
+            'password'  => bcrypt('password'),
             'permission'=> 'owner'
         ]);
 
         User::factory()->create([
             'email'     => 'user@email.com',
             'name'      => 'user',
-            'password'  => bcrypt('secret'),
+            'password'  => bcrypt('password'),
             'permission'=> 'user'
         ]);
     }

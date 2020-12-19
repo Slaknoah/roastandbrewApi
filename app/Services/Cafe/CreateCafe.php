@@ -43,7 +43,7 @@ class CreateCafe
         $this->saveImages( $cafe );
         $this->saveBrewMethods( $cafe );
 
-        return new CafeResource( $cafe );
+        return  $cafe;
     }
 
     private function saveImages( $cafe )

@@ -11,6 +11,7 @@ use App\Models\Company;
 use App\Services\Cafe\CreateCafe;
 use App\Services\Cafe\UpdateCafe;
 use App\Services\Cafe\SearchCafes;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use App\Http\Resources\Cafe\Cafe as CafeResource;
 use Illuminate\Http\Request;
@@ -51,13 +52,11 @@ class CafeController extends Controller
      * @param Company $company
      * @param Cafe $cafe
      *
-     * @return Response
+     * @return JsonResponse
      */
     public function show( Company $company, Cafe $cafe )
     {
-        $cafe = new CafeResource( $cafe );
-
-        return  response()->json( $cafe );
+        return ( new CafeResource( $cafe->loadMissing('company' ) ) )->response();
     }
 
     /**
@@ -66,14 +65,14 @@ class CafeController extends Controller
      *
      * @param CreateCafeRequest $request
      * @param Company $company
-     * @return Response
+     * @return JsonResponse
      */
     public function store(CreateCafeRequest $request, Company $company)
     {
         $createCafe = new CreateCafe( $request->all(), $company );
         $newCafe    = $createCafe->save();
 
-        return response()->json( $newCafe, 201 );
+        return ( new CafeResource( $newCafe->loadMissing('company' ) ) )->response();
     }
 
     /**

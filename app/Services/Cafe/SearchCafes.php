@@ -29,7 +29,7 @@ class SearchCafes
         $this->applyOrder();
 
         // Eager load relationships
-        return $this->query->paginate( $this->take );
+        return $this->query->with(['company'])->paginate( $this->take );
     }
 
     private function applyCompanyFilter()

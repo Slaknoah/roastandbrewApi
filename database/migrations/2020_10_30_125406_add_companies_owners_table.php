@@ -31,7 +31,9 @@ class AddCompaniesOwnersTable extends Migration
     {
         Schema::table('companies_owners', function (Blueprint $table) {
             $table->dropForeign('companies_owners_company_id_foreign');
-            $table->dropColumn('permission');
+            $table->dropForeign('companies_owners_user_id_foreign');
         });
+
+        Schema::dropIfExists('companies_owners');
     }
 }

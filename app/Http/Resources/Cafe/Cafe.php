@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Cafe;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Company\Company as CompanyResource;
 
 class Cafe extends JsonResource
 {
@@ -27,7 +28,7 @@ class Cafe extends JsonResource
             'tea'               => $this->tea,
             'matcha'            => $this->matcha,
             'primary_image_url' => $this->primary_image_url,
-            'company'           => $this->company,
+            'company'           => new CompanyResource( $this->whenLoaded('company' ) ),
             'brew_methods'      => $this->brewMethods
         ];
     }

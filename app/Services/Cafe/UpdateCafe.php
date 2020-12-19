@@ -56,8 +56,10 @@ class UpdateCafe
      * Saves brew methods to cafe
      */
     private function saveBrewMethods() {
-        $brewMethodsArr = explode(',', $this->data['brew_methods']);
+        if ( isset( $this->data['brew_methods'] ) ) {
+            $brewMethodsArr = explode(',', $this->data['brew_methods']);
 
-        $this->cafe->brewMethods()->sync( $brewMethodsArr );
+            $this->cafe->brewMethods()->sync( $brewMethodsArr );
+        }
     }
 }
